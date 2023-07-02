@@ -2,6 +2,8 @@
 
 ### Date - 2nd July 2023
 
+## Inception
+
 ### Episode 1 - Part 1: Inception
 
 ! -> for the boiler plate code
@@ -126,5 +128,58 @@ The complexity of the code is too much and thats why JSX came into picture.
 
 Does the script tag order matter ? Yes
 
+```sh
  <div id="root">Smriti</div>
- root.render will replace
+```
+
+root.render will replace
+
+## Igniting our App
+
+### Episode 2 - Part 1: Igniting our App
+
+For pushing our code into production we need to : -
+Bundling
+Chunking
+Code splitting
+Image optimisation
+
+Production ready app. when we do npx create-react-app it gives you a production ready codes which are already setup for us but here we are going to build it from scratch.
+There are lot of other things alongwith react which makes our application fast and production ready.
+npm - is not node package manager .Its a package manager for JS.And has all the packages.
+
+Make our project use npm ?
+npm init
+package.json is configuration for npm.It will manage all package/dependncies.Our dependent on a lot of package .npm will take care of the version of the package.
+We are going to install package , the most important package in our project is a bundler.Our whole code needs to be bundled,complessed,cleaned , cached ,minified before sending it to the production.
+
+- webpack
+- parcel
+- vit
+
+npx-create-react-app uses webpack , babel to bundle our code behind the scenes.
+
+npm install parcel
+
+- There are two types of dependencies
+
+1.  dev dependencies (used while development) -D
+2.  normal dependencies (used in production also)
+
+"parcel": "^2.9.3" -- > ^ update minor version update or parcel (recommended to use ^ , ~ major version update )
+
+What is package.json and package-lock.json ?
+package-lock.json keeps the record of every version . Exact version of dependency.The package.json can have ~ or ^ .package-lock.json have approx version.
+
+node-modules - npm init .fetching all code of parcel and putting it inside node modules.
+We only installed parcel but more folders got into . Because parcel may have few dependencies which has its own dependencies and this is known as transitive dependencies due to which so many folders got inside the node modules.
+Every dependency has its own package.json and it has its own dependencies.
+
+node_modules not go into production / git
+.gitignore
+/node_modules
+
+Push into git - package.json and package-lock.json
+if you have package.json and package-lock.json with you then we can regenerate node_modules. (npm i)
+
+### Episode 2 - Part 2: Igniting our App
