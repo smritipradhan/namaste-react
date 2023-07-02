@@ -123,3 +123,8 @@ root.render(parent);
 The complexity of the code is too much and thats why JSX came into picture.
 
 ### Episode 1 - Part 5: Inception
+
+Does the script tag order matter ? Yes
+
+ <div id="root">Smriti</div>
+ root.render will replace
