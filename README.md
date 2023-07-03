@@ -565,3 +565,6 @@ const AppLayout = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<AppLayout />);
 ```
+
+<img width="1440" alt="Screenshot 2023-07-03 at 11 24 03 PM" src="https://github.com/smritipradhan/namaste-react/assets/47382260/258c4a53-2c61-42b6-abc4-8d18ce2e0924">
+
