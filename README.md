@@ -243,3 +243,7 @@ in server these files are regenerated.
 browserslist
 npm package
 browserslist:["last 2 versions"]
+
+## Laying the Foundation
+
+### Episode 3 - Part 1 - Laying the Foundation
