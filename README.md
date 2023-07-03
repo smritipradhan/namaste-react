@@ -244,6 +244,324 @@ browserslist
 npm package
 browserslist:["last 2 versions"]
 
-## Laying the Foundation
-
 ### Episode 3 - Part 1 - Laying the Foundation
+
+npm scripts (Standard ):-
+
+"scripts": {
+"test": "jest",
+"start": "parcel index.html",
+"build": "parcel build index.html"
+},
+
+npm run start // npm start
+npm run build //npm build wont work
+
+### Episode 3 - Part 2 - Laying the Foundation
+
+const heading = React.createElement("h1", {}, "Namaste React");
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(heading);
+
+heading is a React Element.Its just an object.
+Replace everything inside the root.
+
+```sh
+<body>
+    <div id="root">Not Rendered</div>
+    <script src="./App.js" type="module"></script>
+  </body>
+```
+
+If there is a problem then Not Rendered will be displayed.
+
+### Episode 3 - Part 3 - Laying the Foundation
+
+```sh
+const heading = React.createElement("h1", {}, "Namaste React");
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(heading);
+```
+
+-This is very hard to read. The facebook developers created JSX.
+-JSX and React are different and React can be written without JSX also.JSX makes our lives easier.
+-JSX is not HTML in JAvaScript. JSX is HTML like/XML like language.
+
+```sh
+const root = ReactDOM.createRoot(document.getElementById("root"));
+const headingJSX = <h1>Hello this is JSX Code .</h1>;
+root.render(headingJSX);
+```
+
+const headingJSX = <h1>Hello this is JSX Code .</h1>; -- it is not the valid JavaScript ,jsengine wont understand.
+This code is transpiled(converted into the code that the browsetrs can understand) before going to the JSEngine.(Done by Parcel).
+This is not exactly done by the Parcel,this is given by parcel to Babel(again a package).
+
+JSX => React.createElement => ReactElement-JS Object => HTMLElement(render)
+WHo is converting this code ? Babel
+
+### Episode 3 - Part 4 - Laying the Foundation
+
+React Components
+1.Class Based Components - Old way of writing code
+2.Functional Components - New
+
+Functional Components - Just a normal JavaScript Function which returns JSX Code.
+const fn = () => ;
+const fn = () => {return()} ;
+
+```sh
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+const HeadingComponent = () => {
+  return <h1>Namaste React Heading Functional Component</h1>;
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<HeadingComponent />);
+```
+
+What is Component Composition ?
+
+```sh
+
+const Title = () => {
+  return <h1>Namaste</h1>;
+};
+
+const HeadingComponent = () => {
+  return (
+    <div>
+      <Title />
+      <h1>Namaste React Heading Functional Component</h1>
+    </div>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<HeadingComponent />);
+```
+
+Componnet inside a component is Component Composition
+
+### Episode 3 - Part 5 - Laying the Foundation
+
+```sh
+const Title = function(){
+return(<h1>Hey</h1>)
+}
+```
+
+Inside {} we can write any javaScript code inside JSX.
+
+The data is malicious data ,JSX takes care of it and it does sanitisation.It will prevent cross side scripting attacks for you.
+
+```sh
+const malicious = 1000; //api.getData()
+const HeadingComponent = () => {
+  return (
+    <div>
+      {malicious}
+      <h1>Namaste React Heading Functional Component</h1>
+    </div>
+  );
+};
+```
+
+Calling as a function
+
+```sh
+const Title = () => {
+  return <h1>Namaste</h1>;
+};
+
+const HeadingComponent = () => {
+  return (
+    <div>
+      {Title()}
+      <h1>Namaste React Heading Functional Component</h1>
+    </div>
+  );
+};
+```
+
+Having two elements a root - use React Fragments.React fragment is the parent.React fragment is act as empty tag.
+
+```sh
+const Title = () => {
+  return <h1>Namaste</h1>;
+};
+
+const HeadingComponent = () => {
+  return (
+    <>
+      <div>
+        {Title()}
+        <h1>Namaste React Heading Functional Component</h1>
+      </div>
+      <div>dml</div>
+    </>
+  );
+};
+
+
+```
+
+Can we have multiple root ?
+Can we have fragment inside a fragment ?
+
+### Episode 4 - Part 1 - Talk is Cheap , show me the code
+
+Build a Food ordering App.
+
+```sh
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./App.css";
+
+const Header = () => {
+  return (
+    <div className="header">
+      <div className="header-image">
+        <img src="https://img.freepik.com/premium-vector/catering-quality-food-design-logo_187482-593.jpg" />
+      </div>
+      <div className="nav-items">
+        <ul>
+          <li>Home</li>
+          <li>About</li>
+          <li>Contact Us</li>
+          <li>Cart</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+const RestraurentCard = () => {
+  return (
+    <div className="res-card">
+      <h2 className="card-title">Meghana Foods</h2>
+      <div className="card-image">
+        <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/rxsvhvcdip9dbfdijzk9"></img>
+      </div>
+      <div>Biryani , North Indian</div>
+      <div>4.4 Stars</div>
+      <div>30 minutes</div>
+    </div>
+  );
+};
+
+const Body = () => {
+  return (
+    <div className="body">
+      <div className="search">Search</div>
+      <div className="res-container">
+        <RestraurentCard />
+        <RestraurentCard />
+        <RestraurentCard />
+        <RestraurentCard />
+      </div>
+    </div>
+  );
+};
+const AppLayout = () => {
+  return (
+    <div className="app">
+      <Header />
+      <Body />
+    </div>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<AppLayout />);
+
+```
+
+### Episode 4 - Part 2 - Talk is Cheap , show me the code
+
+config driven ui -> according to the data the ui is changed.
+Images are put inside CDN .Cloudinary Image is CDN
+map,filter,reduce
+
+key should be unique - react cannot uniquely identify all these cards and will rerender all this cards.When new card added , react wont know and rerender all the card. but if we give the id , react will know about the cards and render only one card. So giving the unique id is important.
+
+```sh
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./App.css";
+import { restraurentData } from "./restraurentCard";
+
+const Header = () => {
+  return (
+    <div className="header">
+      <div className="header-image">
+        <img src="https://img.freepik.com/premium-vector/catering-quality-food-design-logo_187482-593.jpg" />
+      </div>
+      <div className="nav-items">
+        <ul>
+          <li>Home</li>
+          <li>About</li>
+          <li>Contact Us</li>
+          <li>Cart</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+const RestraurentCard = ({ restraurent }) => {
+  const {
+    name,
+    cloudinaryImageId,
+    cuisines,
+    avgRating,
+    deliveryTime,
+    costForTwoString,
+  } = restraurent;
+  return (
+    <div className="res-card">
+      <h2 className="card-title">{name}</h2>
+      <div className="card-image">
+        <img
+          src={`https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/${cloudinaryImageId}`}
+        ></img>
+      </div>
+      <div className="cuisine">{cuisines.join("  , ")}</div>
+      <div>{avgRating}</div>
+      <div>{deliveryTime} mins</div>
+      <div>{costForTwoString}</div>
+    </div>
+  );
+};
+
+const Body = () => {
+  return (
+    <div className="body">
+      <div className="search">Search</div>
+      <div className="res-container">
+        {restraurentData.map((restraurent) => {
+          return (
+            <RestraurentCard
+              restraurent={restraurent?.data}
+              key={restraurent?.data?.id}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+const AppLayout = () => {
+  return (
+    <div className="app">
+      <Header />
+      <Body />
+    </div>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<AppLayout />);
+```

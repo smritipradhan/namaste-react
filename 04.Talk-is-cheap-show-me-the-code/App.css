@@ -1,0 +1,80 @@
+.header-image img {
+  height: 50px;
+  width: 50px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding: 10px 30px;
+  background-color: rgb(199, 224, 246);
+}
+
+.nav-items ul {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-items li {
+  font-size: 18px;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.res-card {
+  min-height: 300px;
+  max-width: 200px;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(199, 224, 246);
+}
+
+.search {
+  padding: 10px;
+  height: 20px;
+  width: 400px;
+  background-color: rgb(199, 224, 246);
+  margin: 20px 0px;
+  border: 1px solid rgb(226, 209, 188);
+}
+
+.body {
+  padding: 20px;
+}
+
+.res-card {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.res-card:hover {
+  border: 1px solid palevioletred;
+}
+.card-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-image {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card-image img {
+  object-fit: contain;
+  height: 100px;
+}
+
+.res-container {
+  display: flex;
+  row-gap: 20px;
+  column-gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cuisine {
+  display: flex;
+}
