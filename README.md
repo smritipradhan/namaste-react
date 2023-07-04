@@ -568,3 +568,19 @@ root.render(<AppLayout />);
 
 <img width="1440" alt="Screenshot 2023-07-03 at 11 24 03 PM" src="https://github.com/smritipradhan/namaste-react/assets/47382260/258c4a53-2c61-42b6-abc4-8d18ce2e0924">
 
+### Episode 5 - Part 1 - Let's Get Hooked
+
+1. React Hooks.
+2. Clean
+
+.js / .jsx are the same .
+
+There are two types of Exports
+1.Named Exports/imports ->export const <> -> import {} from ""
+2.Defailt Exports/imports -> default export - import \_\_ from ""
+
+One file can have only one default export . Default Export of file
+There can be multiple names exports.
+Can I have names export with default export?
+
+### Episode 5 - Part 2 - Let's Get Hooked
