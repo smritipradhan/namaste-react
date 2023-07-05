@@ -1,0 +1,25 @@
+.body {
+  padding: 20px;
+}
+
+.res-container {
+  display: flex;
+  row-gap: 20px;
+  column-gap: 20px;
+  flex-wrap: wrap;
+}
+
+.search {
+  margin: 20px 0px;
+}
+
+.filter-btn {
+  margin: 0px 0px 20px 0px;
+  border: unset;
+  background-color: aliceblue;
+  border: 1px solid rebeccapurple;
+}
+
+.filter-btn:hover {
+  background-color: bisque;
+}

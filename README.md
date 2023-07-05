@@ -584,3 +584,133 @@ There can be multiple names exports.
 Can I have names export with default export?
 
 ### Episode 5 - Part 2 - Let's Get Hooked
+
+Whenever state change React,reevaluates
+
+Virtual DOM - representation of Real Dom
+Reconcilation Algorithm(React Fibre)
+Difference between two objects and compare and update real update.Old and new comparision.It is doing efficient DOM Manipulation.
+
+Diff Algorithm
+
+```sh
+  const handleTopRatedRestraurentData = () => {
+    setSearchedCardData(
+      restraurentCardData.filter((data) => {
+        return data.data.avgRating > 4;
+      })
+    );
+  };
+```
+
+setState triggers the diff algorithm .
+
+### Episode 6 - Part 1 - Exploring the World
+
+## Monolith and Microservice Architecture
+
+Monolith Architecture - Earlier days the projects were developed in Monolith Architecture.
+We had -
+1.API
+2.UI
+3.Auth
+4.DB
+5.SMS
+code in the same project.
+
+Microservice Architecture -
+All different services -
+1.Backend Service
+2.UI
+3.Auth
+4.SMS
+5.Email Notification
+
+This are microservices and combine together to build app.This is known as seperation of concerns and follows single responsibility principle.Each and every service has its own job.
+
+How do this services Interact with Each other ??
+
+They are interecting and written in different languages.All this services run on their own specific ports.
+
+/api
+/sms
+
+using apis.
+
+### Episode 6 - Part 2 - Exploring the World
+
+Fetch the Data from the API and populate our page.
+There are two approches to make an API call.
+1.Loads -> Make API Call -> Render into the UI
+2.Loads -> Render -> Make API Call -> Render
+
+In React we will always use the second approach.(btter user exp.)problem - rendering twice but react rendering mechanism is fast.
+
+useEffect-> useEffect will be called after the component is being rendered.
+
+fetch -> given by browsers not javascript. Its a feature which JS engine has.
+
+Can we use swiggy api in our app ?
+Our browser is not allowing us to call from localhost to swiggy because of different origin.From one origin to different origin and thats CORS policy.How do we by pass this CORS ? Cors chrome extension.
+
+Resource - Akshay saini cors video on youtube.
+
+```sh
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4400802&lng=78.3489168&sortBy=DELIVERY_TIME&page_type=DESKTOP_WEB_LISTING"
+    );
+    const restrauData = await data.json();
+    setRestraurentCardData(restrauData?.data?.cards[0].data.data.cards);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+```
+
+### Episode 6 - Part 3 - Exploring the World
+
+```sh
+{Array(20)
+              .fill(undefined)
+              .map(() => {
+                return <Breathing width={200} height={300} />;
+              })}
+
+```
+
+```sh
+{Array(20)
+              .fill(undefined)
+              .map(() => {
+                return <Shimmer width={200} height={300} />;
+              })}
+
+```
+
+### Episode 6 - Part 4 - Exploring the World
+
+State and setStae.
+When state variable cahnge , the component will rerender .
+new value creates and with different value.Diff algorithm working in particular section.
+
+### Episode 6 - Part 4 - Exploring the World
+
+Search Functionality
+
+```sh
+
+  useEffect(() => {
+    if (searchInput || searchInput === "") {
+      setSearchedCardData(
+        restraurentCardData.filter((element) => {
+          return element?.data?.name
+            .toLowerCase()
+            .includes(searchInput.toLowerCase());
+        })
+      );
+    }
+  }, [searchInput]);
+```

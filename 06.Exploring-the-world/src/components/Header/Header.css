@@ -1,0 +1,23 @@
+.header-image img {
+  height: 50px;
+  width: 50px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding: 10px 30px;
+  background-color: rgb(199, 224, 246);
+}
+
+.nav-items ul {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-items li {
+  font-size: 18px;
+  text-decoration: none;
+  list-style-type: none;
+}

@@ -1,0 +1,29 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "Ignite",
+  "scripts": {
+    "test": "jest",
+    "start": "parcel src/index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smritipradhan/namaste-react.git"
+  },
+  "author": "Smriti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smritipradhan/namaste-react/issues"
+  },
+  "homepage": "https://github.com/smritipradhan/namaste-react#readme",
+  "dependencies": {
+    "parcel": "^2.9.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-shimmer": "^3.2.0"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  }
+}

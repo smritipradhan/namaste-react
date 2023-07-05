@@ -14,24 +14,34 @@ export const Body = () => {
     setSeachInput(e.target.value);
   };
 
-  useEffect(() => {
-    if (searchInput || searchInput === "") {
-      setSearchedCardData(
-        restraurentCardData.filter((element) => {
-          return element?.data?.name
-            .toLowerCase()
-            .includes(searchInput.toLowerCase());
-        })
-      );
-    }
-  }, [searchInput]);
+  // useEffect(() => {
+  //   if (searchInput || searchInput === "") {
+  //     setSearchedCardData(
+  //       restraurentCardData.filter((element) => {
+  //         return element?.data?.name
+  //           .toLowerCase()
+  //           .includes(searchInput.toLowerCase());
+  //       })
+  //     );
+  //   }
+  // }, [searchInput]);
+
+  const handleTopRatedRestraurentData = () => {
+    setSearchedCardData(
+      restraurentCardData.filter((data) => {
+        return data.data.avgRating > 4;
+      })
+    );
+  };
 
   return (
     <div className="body">
       <div className="search">
         <Search handleChange={handleChange} />
       </div>
-      <button className="filter-btn">Top Rated Restraurent</button>
+      <button className="filter-btn" onClick={handleTopRatedRestraurentData}>
+        Top Rated Restraurent
+      </button>
       <div className="res-container">
         {searchedCardData.map((restraurent) => {
           return (
