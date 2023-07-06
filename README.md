@@ -136,7 +136,7 @@ root.render will replace
 
 ## Igniting our App
 
-### Episode 2 - Part 1: Igniting our App
+### Episode 2 - Part 1: Igniting our App || Date - 02-Juny 2023
 
 For pushing our code into production we need to : -
 Bundling
@@ -244,7 +244,7 @@ browserslist
 npm package
 browserslist:["last 2 versions"]
 
-### Episode 3 - Part 1 - Laying the Foundation
+### Episode 3 - Part 1 - Laying the Foundation || Date - 03-Juny 2023
 
 npm scripts (Standard ):-
 
@@ -411,7 +411,7 @@ const HeadingComponent = () => {
 Can we have multiple root ?
 Can we have fragment inside a fragment ?
 
-### Episode 4 - Part 1 - Talk is Cheap , show me the code
+### Episode 4 - Part 1 - Talk is Cheap , show me the code || Date - 04-Juny 2023
 
 Build a Food ordering App.
 
@@ -568,7 +568,7 @@ root.render(<AppLayout />);
 
 <img width="1440" alt="Screenshot 2023-07-03 at 11 24 03 PM" src="https://github.com/smritipradhan/namaste-react/assets/47382260/258c4a53-2c61-42b6-abc4-8d18ce2e0924">
 
-### Episode 5 - Part 1 - Let's Get Hooked
+### Episode 5 - Part 1 - Let's Get Hooked || Date - 04-Juny 2023
 
 1. React Hooks.
 2. Clean
@@ -714,3 +714,392 @@ Search Functionality
     }
   }, [searchInput]);
 ```
+
+### Episode 7 - Part 1 - Finding the Path
+
+Topics for today
+Routing
+
+#### useEffect Hook
+
+useEffect(()=>{}) - If no dependency , useEffect will be called everytime the component renders.Every time the component rendered.
+useEffect(()=>{},[]) - Empty dependency , useEffect will be called on initial render and just once.
+useEffect(()=>{},[btnReact]) -> Every time my btnReact changes my dependency will be called.
+
+#### useState() Hook
+
+1.Never use the hooks outside the component.
+2.Used to create local state variables inside your functional component.
+3.Never use useState inside conditions.
+
+### Episode 7 - Part 3 - Finding the Path
+
+Routes inside your application.
+New version in React Router.
+
+createBrowserRouter()-> It takes lists of paths and element . and then we provide this configuration
+
+```sh
+...
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+...
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+  },
+  {
+    path: "/about",
+    element: <AboutUs />,
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<RouterProvider router={appRouter} />);
+
+```
+
+We provide the router configuration by using RouterProvider.
+
+```sh
+root.render(<RouterProvider router={appRouter} />);
+```
+
+Error
+
+Using useRouteError Hook
+
+```sh
+import React from "react";
+import { useRouteError } from "react-router-dom";
+
+const Error = () => {
+  const err = useRouteError();
+  console.log(err);
+  return (
+    <div>
+      <h1>Opps</h1>
+      <h2>Something Went Wrong</h2>
+      <h3>{err.status}</h3>
+      <h3>{err.statusText}</h3>
+    </div>
+  );
+};
+
+export default Error;
+```
+
+Adding Error Element
+
+```sh
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <Error />,
+  },
+  {
+    path: "/about",
+    element: <AboutUs />,
+  },
+  {
+    path: "/contact",
+    element: <ContactUs />,
+  },
+```
+
+Topic - Header will stay intact and only the Body will change.
+Adding the children routes
+
+To implement the functionality for this where the Header will stay intact and the Body , bous us and the contact us will change.We will achive it using the Outket and the hildren routes.
+
+<Header>
+<Body>
+--
+<Header>
+<AboutUs>
+--
+<Header>
+<ContactU>
+--
+
+Children routes and the Outlets
+
+```sh
+const AppLayout = () => {
+  return (
+    <div className="app">
+      <Header />
+      <Outlet />
+    </div>
+  );
+};
+
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
+      },
+      {
+        path: "/contact",
+        element: <ContactUs />,
+      },
+    ],
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<RouterProvider router={appRouter} />);
+
+```
+
+#### Now Connect the Header to the Pages when we click on the Links
+
+When we are using React , never use the anchor tag.Because the when we go the About us page , the entire page got refreshed.I can navigate to a different page without reloading the page. Thats why this is called as Single Page Application.
+
+There are two types of routing.
+1.Client Side Routing
+2.Server Side Routing
+We are doing Client Side Routing.
+
+### Episode 7 - Part 5 - Finding the Path
+
+We will create new page for every Restraurent in our Home Page. We will work on the Dynamic Routing.
+Dynamic Routing.- We have a dynamic routing for every Resttrarent Page.
+
+````sh
+    <NavLink to={`/restraurent/${id}`} className="navlink">
+      ....
+    </NavLink>
+    ```
+````
+
+```sh
+import React from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import "./RestraurentMenu.css";
+import { CDN_LINK } from "../../utils/constants";
+import { Breathing } from "react-shimmer";
+
+const RestraurentMenu = () => {
+  const [restraurentMenuData, setRestrauretMenuData] = useState(null);
+  const [restraurentId, setRestraurentId] = useState("");
+  const params = useParams();
+  const fetchMenuData = async (resId) => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4400802&lng=78.3489168&sortBy=DELIVERY_TIME&page_type=DESKTOP_WEB_LISTING"
+    );
+    const restrauData = await data.json();
+    setRestrauretMenuData(
+      restrauData.data.cards[0]?.data?.data.cards.filter(
+        (restraurent) => restraurent.data.id === resId
+      )
+    );
+  };
+
+  useEffect(() => {
+    setRestraurentId(params.id);
+    fetchMenuData(params.resId);
+  }, []);
+
+  if (restraurentMenuData === null) {
+    return (
+      <div className="breathe">
+        <Breathing width={100} height={100} />
+      </div>
+    );
+  }
+
+  const {
+    name,
+    cloudinaryImageId,
+    avgRating,
+    deliveryTime,
+    costForTwoString,
+    cuisines,
+  } = restraurentMenuData[0]?.data || "";
+
+  return (
+    <div>
+      Restraurent Menu
+      <div className="restraurent-menu-card">
+        {name}
+        <div className="image">
+          <img src={`${CDN_LINK}/${cloudinaryImageId}`}></img>
+        </div>
+        {/* <div className="cuisine">{cuisines.join("  , ")}</div> */}
+        <div>{avgRating}</div>
+        <div>{deliveryTime} mins</div>
+        <div>{costForTwoString}</div>
+      </div>
+    </div>
+  );
+};
+
+export default RestraurentMenu;
+```
+
+### Episode 8 - Part 1 - Lets get Classy (06-July-2023)
+
+Class Based Component - Old Way of writing code.
+1.How React lifecycle works
+2.How React components are rendered onto the screen.
+
+In the About Us Page , we will fetch the Data from API and show team members card.
+
+Functional COmponent - A function that returns a JSX Code.
+Class Component - A class which has a function which returns JSX Code.
+
+React.Component is a class and our component is inheriting some properties from it.Whenever we craete an instance of a class , a contructor is called amd the props are extracted over here and now we can use this props using this.props .All the props you pass will be combined into an object.
+
+UserClass.js
+
+```sh
+
+import React from "react";
+class UserClass extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+  }
+  render() {
+    const { name, designation, year } = this.props;
+    return (
+      <div>
+        <div>{name}</div>
+        <div>{designation}</div>
+        <div>{year}</div>
+      </div>
+    );
+  }
+}
+
+export default UserClass;
+```
+
+User.js
+
+```sh
+import React from "react";
+
+const User = ({ name, designation, year }) => {
+return (
+<div>
+<div>{name}</div>
+<div>{designation}</div>
+<div>{year}</div>
+</div>
+);
+};
+
+export default User;
+```
+
+### Episode 8 - Part 2 - Lets get Classy (06-July-2023)
+
+- How do we create State and Local Variables in our Component.
+  rendering the functional component - invoking / calling / mounting the functional component .
+  Instance of a Class Component - loading the instance of the class, constructor is called . so inside constructor , is the best place to receive the props and initialise the stae of the class.there was a way of creating the state.
+
+the state object in class based component. In functional component the state variables are stored as a big object behind the scenes.
+
+```sh
+import React from "react";
+class UserClass extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+      count1: 1,
+    };
+  }
+  render() {
+    const { name, designation, year } = this.props;
+    const { count } = this.state;
+    return (
+      <div>
+        <div>{name}</div>
+        <div>{designation}</div>
+        <div>{year}</div>
+        <h1>Count{count}</h1>
+      </div>
+    );
+  }
+}
+
+export default UserClass;
+```
+
+### Episode 8 - Part 3 - Lets get Classy (06-July-2023)
+
+Updating the state-> Never update the state directly.
+
+```sh
+ this.setState({
+              count: this.state.count + 1,
+});
+```
+
+Note : Can update the states together (batch them)
+
+### Episode 8 - Part 4 - Lets get Classy (06-July-2023)
+
+#### Lifecycle of React Class Based Components.
+
+How this class based component is mounted/loaded in the webpage.
+A component sees a component inside it and then the component inside the parent componen loads/mounter.
+When the Class Based component is loaded/mounted then
+1.First the Constructor is called.
+2.Then render is called.
+
+Parent Constructor
+-Parent Render
+Child Constructor
+-Child Render
+
+---
+
+Constructor
+Render
+ComponentDidMount
+
+order
+
+- parent constructor
+  parent render
+  child constructor
+  child rendder
+  child componentDidMount
+  parent componentDidMount
+- The api calls are made inside componentDidMount. Because is react we first render the component and then make an api call and then rerender with the updated data.
+
+### Episode 8 - Part 5 - Lets get Classy (06-July-2023)
+
+Batch the render phases of the child components. Render phase is very fast .Commit phase takes time .So React batch all the render phase of the childrent .Manipulating the DOM takes time.So React tries to batches things up before manipulating the DOM.
+
+Parent Constructor
+Parent Render
+-First Child Constructor
+-First Child Render
+-Second Child Constructor
+-Second Child Render
+
+<DOM Manipulation Happens - In Single Batch>
+
+-First Child ComponentDidMount
+-Second Child ComponentDidMount
+Parent ComponentDidMount
+
+### Episode 8 - Part 6 - Lets get Classy (06-July-2023)
+
+How we will make an api call inside a class based component.

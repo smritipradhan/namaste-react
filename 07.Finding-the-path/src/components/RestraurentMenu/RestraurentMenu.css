@@ -1,0 +1,14 @@
+.restraurent-menu-card {
+  height: 200px;
+  width: 800px;
+  padding: 20px;
+  border: 1px;
+
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.image img {
+  height: 100px;
+  width: 100px;
+}
