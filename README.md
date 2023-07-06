@@ -1103,3 +1103,88 @@ Parent ComponentDidMount
 ### Episode 8 - Part 6 - Lets get Classy (06-July-2023)
 
 How we will make an api call inside a class based component.
+
+```sh
+import React from "react";
+class UserClass extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "user",
+      bio: "dummy",
+      location: "dummy",
+      avatar_url: "avatar_url",
+    };
+  }
+
+  async componentDidMount() {
+    const data = await fetch("https://api.github.com/users/smritipradhan");
+    const json = await data.json();
+    this.setState({
+      name: json?.name,
+      bio: json?.bio,
+      location: json?.location,
+      avatar_url: json?.avatar_url,
+    });
+  }
+
+  render() {
+    const { name, bio, location, avatar_url } = this.state;
+    return (
+      <div>
+        <div>{name}</div>
+        <div>{bio}</div>
+        <div>{location}</div>
+        {}
+        <div>
+          <img src={avatar_url} style={{ height: "300px", width: "300px" }} />
+        </div>
+        {/* <h5>Count{count}</h5>
+        <button
+          onClick={() => {
+            this.setState({
+              count: this.state.count + 1,
+            });
+          }}
+        >
+          Increase
+        </button> */}
+      </div>
+    );
+  }
+}
+
+export default UserClass;
+
+```
+
+Note:debugger
+
+Constructor callled
+render()
+componentDidMount()
+render()
+componentDidUpdate()
+
+---
+
+/\*
+---Mounting---
+Constructor (dummy)
+render(dummy)
+
+      <HTML dummy>
+
+Component did mount
+<API Call>
+<this.setState> --> State variables updated
+
+---update
+render(with new data)
+
+<HTML with new data>
+componentDidUpdate()
+componentWillUnmount()  
+\*/
+
+### Episode 8 - Part 7 - Lets get Classy (06-July-2023)

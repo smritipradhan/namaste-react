@@ -7,13 +7,13 @@ const AboutUs = () => {
   return (
     <div>
       About Us
-      <div className="user-card">
+      {/* <div className="user-card">
         <User
           name="Smriti (Functional Component)"
           designation="Software Engineer"
           year="2022"
         />
-      </div>
+      </div> */}
       <div className="user-card">
         <UserClass
           name="Smriti (Class Component)"
